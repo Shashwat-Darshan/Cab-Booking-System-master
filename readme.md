@@ -1,6 +1,6 @@
 # Rido - A Cab Booking System
 
-### By: Krish Srivastava
+### By: Shashwat Darshan
 
 ## Table of Contents
 
@@ -127,4 +127,4 @@ Snapshots of the application interface are included in the project repository.
 
 ## Project Repository
 
-[Rido GitHub Repository](https://github.com/krish-srivastava-2305/Cab-Booking-System)
+[Rido GitHub Repository](https://github.com/Shashwat-Darshan/Cab-Booking-System-master)
