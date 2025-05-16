@@ -1,21 +1,17 @@
 import axios from "axios";
 import captainModel from "../models/captain.model.js";
 
+// Declare API key once at the top
+const apiKey = process.env.ORS_API_KEY;
+
 // Get coordinates of an address
 const getAddressCoordinates = async (address) => {
-  // apiKey use
-  const apiKey = process.env.ORS_API_KEY;
-
-  // url construction for the API
   const url = `https://api.openrouteservice.org/geocode/search?api_key=${apiKey}&text=${address}`;
   try {
-    // axios get request to the ORS server
     const response = await axios.get(url);
     if (response.data.features.length === 0) {
       return null;
     }
-
-    // Extracting the latitude and longitude from the response
     const features = response.data.features[0];
     const [lng, lat] = features.geometry.coordinates;
     return { lat, lng };
@@ -29,8 +25,6 @@ const getDistanceAndTime = async (origin, destination) => {
   if (!origin || !destination) {
     return null;
   }
-
-  const apiKey = process.env.ORS_API_KEY;
   const url = `https://api.openrouteservice.org/v2/directions/driving-car`;
 
   try {
@@ -63,8 +57,8 @@ const getSuggestions = async (input) => {
   if (!input) {
     return null;
   }
-  const apiKey = process.env.ORS_API_KEY;
   const url = `https://api.openrouteservice.org/geocode/autocomplete?api_key=${apiKey}&text=${input}`;
+  
   try {
     const response = await axios.get(url);
     if (response.data.features.length === 0) {
@@ -78,7 +72,6 @@ const getSuggestions = async (input) => {
 
 const getCaptainsInRadius = async (ltd, lng, radius) => {
   // radius in km
-
   const captains = await captainModel.find({
     location: {
       $geoWithin: {
